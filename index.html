@@ -1,16 +1,40 @@
-<body>
+<style>
 
-<h1>Start Planning Your Trip</h1>
+body{
+    font-family:'Poppins', sans-serif;
+    background:#f4f6f8;
+}
 
-<div class="planner-bar">
+.planner-bar{
+    display:flex;
+    gap:12px;
+    padding:18px;
+    background:white;
+    border-radius:14px;
+    width:fit-content;
+    margin:60px auto;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
 
-<input type="text" placeholder="From where?">
-<input type="text" placeholder="To where?">
-<input type="date">
-<input type="date">
+.planner-bar input{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:15px;
+}
 
-<button class="search-btn">Start Planning</button>
+.search-btn{
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+}
 
-</div>
+.search-btn:hover{
+    background:#1d4ed8;
+}
 
-</body>
+</style>
