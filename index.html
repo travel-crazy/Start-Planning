@@ -57,71 +57,120 @@ h1{
 <h1>Start Planning Your Trip</h1>
 
 <div class="planner-bar">
-    <input type="text" placeholder="From where?">
-    <input type="text" placeholder="To where?">
-    <input type="date" placeholder="Departure date">
-    <input type="date" placeholder="Arrival date">
-    <div class="trip-type-toggle">
-  <input type="checkbox" id="trip-toggle">
-  <label for="trip-toggle" class="toggle-label">
-    <span class="left">One Way</span>
-    <span class="right">Round Trip</span>
-    <span class="slider"></span>
-  </label>
+  <input type="text" placeholder="From where?">
+  <input type="text" placeholder="To where?">
+  <input type="date" placeholder="Departure date">
+
+  <!-- Arrival date input -->
+  <input type="date" id="arrival-date" placeholder="Arrival date">
+
+  <!-- Small one-way / round-trip toggle -->
+  <div class="trip-type-small">
+    <input type="checkbox" id="trip-toggle">
+    <label for="trip-toggle" class="small-toggle">
+      <span class="circle"></span>
+    </label>
+    <span class="toggle-text" id="trip-text">One Way</span>
+  </div>
+
+  <button class="search-btn">Start Planning</button>
 </div>
 
 <style>
-.trip-type-toggle {
-  display: inline-block;
-  vertical-align: middle;
+.planner-bar{
+  display:flex;
+  gap:10px;
+  padding:15px;
+  background:white;
+  border-radius:12px;
+  width:fit-content;
+  margin:50px auto;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-.toggle-label {
-  position: relative;
+.planner-bar input{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+.search-btn{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#007bff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.search-btn:hover{
+  background:#0056b3;
+}
+
+/* Small toggle */
+.trip-type-small {
   display: flex;
   align-items: center;
-  width: 120px;
-  height: 36px;
-  background: #ccc;
-  border-radius: 18px;
-  cursor: pointer;
-  user-select: none;
+  gap: 5px;
   font-family: Arial, sans-serif;
   font-size: 14px;
-  font-weight: bold;
-  padding: 0 5px;
-  box-sizing: border-box;
 }
 
-.toggle-label span.left,
-.toggle-label span.right {
-  flex: 1;
-  text-align: center;
-  z-index: 2;
+.small-toggle {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
 }
 
-.toggle-label .slider {
+.small-toggle .circle {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 56px;
-  height: 32px;
+  width: 16px;
+  height: 16px;
   background: #007bff;
-  border-radius: 16px;
-  transition: 0.3s;
-  z-index: 1;
+  border-radius: 50%;
+  transition: 0.25s;
 }
 
 #trip-toggle {
   display: none;
 }
 
-#trip-toggle:checked + .toggle-label .slider {
-  transform: translateX(60px);
+#trip-toggle:checked + .small-toggle .circle {
+  transform: translateX(20px);
+}
+
+.toggle-text {
+  user-select: none;
 }
 </style>
-    <button class="search-btn">Search</button>
-</div>
 
-</body>
-</html>
+<script>
+// Get elements
+const toggle = document.getElementById('trip-toggle');
+const arrival = document.getElementById('arrival-date');
+const tripText = document.getElementById('trip-text');
+
+// Update on toggle change
+toggle.addEventListener('change', () => {
+  if(toggle.checked){
+    tripText.textContent = 'Round Trip';
+    arrival.style.display = 'inline-block';
+  } else {
+    tripText.textContent = 'One Way';
+    arrival.style.display = 'none';
+  }
+});
+
+// Initialize: hide arrival if one way
+if(!toggle.checked){
+  arrival.style.display = 'none';
+}
+</script>
