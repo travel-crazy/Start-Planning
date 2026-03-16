@@ -12,7 +12,7 @@ body{
     margin:0;
     padding:0;
 }
-
+    
 h1{
     text-align:center;
     margin-top:40px;
@@ -161,10 +161,10 @@ const tripText = document.getElementById('trip-text');
 // Update on toggle change
 toggle.addEventListener('change', () => {
   if(toggle.checked){
-    tripText.textContent = 'Round Trip';
+    tripText.textContent = 'One way';
     arrival.style.display = 'inline-block';
   } else {
-    tripText.textContent = 'One Way';
+    tripText.textContent = 'Round trip';
     arrival.style.display = 'none';
   }
 });
