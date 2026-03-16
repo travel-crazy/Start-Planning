@@ -161,10 +161,10 @@ const tripText = document.getElementById('trip-text');
 // Update on toggle change
 toggle.addEventListener('change', () => {
   if(toggle.checked){
-    tripText.textContent = 'One way';
+    tripText.textContent = 'Round trip';
     arrival.style.display = 'inline-block';
   } else {
-    tripText.textContent = 'Round trip';
+    tripText.textContent = 'One way';
     arrival.style.display = 'none';
   }
 });
