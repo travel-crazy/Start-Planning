@@ -1,8 +1,22 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Planning</title>
 
+<style>
 body{
     font-family: Arial, sans-serif;
     background:#f4f6f8;
+    margin:0;
+    padding:0;
+}
+
+h1{
+    text-align:center;
+    margin-top:40px;
+    color:#333;
 }
 
 .planner-bar{
@@ -33,4 +47,22 @@ body{
     cursor:pointer;
 }
 
+.search-btn:hover{
+    background:#0056b3;
+}
 </style>
+</head>
+<body>
+
+<h1>Start Planning Your Trip</h1>
+
+<div class="planner-bar">
+    <input type="text" placeholder="From where?">
+    <input type="text" placeholder="To where?">
+    <input type="date" placeholder="Departure date">
+    <input type="date" placeholder="Arrival date">
+    <button class="search-btn">Start Planning</button>
+</div>
+
+</body>
+</html>
