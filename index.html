@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Planning</title>
+<title>Search Flights</title>
 
 <style>
 body{
     font-family: Arial, sans-serif;
     background:#f4f6f8;
     margin:0;
-    padding:0;
-}
-    
-h1{
     text-align:center;
+}
+
+h1{
     margin-top:40px;
-    color:#333;
 }
 
 .planner-bar{
@@ -50,132 +48,96 @@ h1{
 .search-btn:hover{
     background:#0056b3;
 }
+
+/* Result box */
+#flightResult{
+    display:none;
+    margin-top:20px;
+}
+
+.result-card{
+    background:white;
+    display:inline-block;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.result-card button{
+    margin:10px;
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.buy{
+    background:green;
+    color:white;
+}
+
+.skip{
+    background:gray;
+    color:white;
+}
 </style>
 </head>
+
 <body>
 
-<h1>Start Planning Your Trip</h1>
+<h1>Search Flights ✈️</h1>
 
 <div class="planner-bar">
-  <input type="text" placeholder="From where?">
-  <input type="text" placeholder="To where?">
-  <input type="date" placeholder="Departure date">
+  <input type="text" id="from" placeholder="From where?">
+  <input type="text" id="to" placeholder="To where?">
+  <input type="date" id="date">
+  <button class="search-btn" onclick="searchFlights()">Search</button>
+</div>
 
-  <!-- Arrival date input -->
-  <input type="date" id="arrival-date" placeholder="Arrival date">
-
-  <!-- Small one-way / round-trip toggle -->
-  <div class="trip-type-small">
-    <input type="checkbox" id="trip-toggle">
-    <label for="trip-toggle" class="small-toggle">
-      <span class="circle"></span>
-    </label>
-    <span class="toggle-text" id="trip-text">One Way</span>
+<!-- RESULT -->
+<div id="flightResult">
+  <div class="result-card">
+    <p id="flightInfo">Searching...</p>
+    <button class="buy" onclick="buyFlight()">Buy</button>
+    <button class="skip" onclick="skipFlight()">Skip</button>
   </div>
-
-  <button class="Search-btn" onclick="SearchingFlights()">search</button>
 </div>
-<div id="flightResult" style="display:none; text-align:center; margin-top:20px;">
-  <p id="flightInfo"></p>
-  <button onclick="buyFlight()">Buy</button>
-  <button onclick="skipFlight()">Skip</button>
-</div>
-<style>
-.planner-bar{
-  display:flex;
-  gap:10px;
-  padding:15px;
-  background:white;
-  border-radius:12px;
-  width:fit-content;
-  margin:50px auto;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-.planner-bar input{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:16px;
-}
-
-.search-btn{
-  padding:10px 20px;
-  border:none;
-  border-radius:8px;
-  background:#007bff;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.search-btn:hover{
-  background:#0056b3;
-}
-
-/* Small toggle */
-.trip-type-small {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-
-.small-toggle {
-  position: relative;
-  width: 40px;
-  height: 20px;
-  background: #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.small-toggle .circle {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  background: #007bff;
-  border-radius: 50%;
-  transition: 0.25s;
-}
-
-#trip-toggle {
-  display: none;
-}
-
-#trip-toggle:checked + .small-toggle .circle {
-  transform: translateX(20px);
-}
-
-.toggle-text {
-  user-select: none;
-}
-</style>
 
 <script>
-// Get elements
-const toggle = document.getElementById('trip-toggle');
-const arrival = document.getElementById('arrival-date');
-const tripText = document.getElementById('trip-text');
+function searchFlights() {
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+  const date = document.getElementById("date").value;
 
-// Update on toggle change
-toggle.addEventListener('change', () => {
-  if(toggle.checked){
-    tripText.textContent = 'Round trip';
-    arrival.style.display = 'inline-block';
-  } else {
-    tripText.textContent = 'One way';
-    arrival.style.display = 'none';
+  if (!from || !to || !date) {
+    alert("Please fill all fields!");
+    return;
   }
-});
 
-// Initialize: hide arrival if one way
-if(!toggle.checked){
-  arrival.style.display = 'none';
+  const resultBox = document.getElementById("flightResult");
+  const info = document.getElementById("flightInfo");
+
+  resultBox.style.display = "block";
+  info.innerText = "Searching for the best flights... ✈️";
+
+  setTimeout(function() {
+    const price = Math.floor(Math.random() * 200) + 50;
+    info.innerText = "✈️ Flight from " + from + " → " + to + " on " + date + "\n💸 Price: £" + price + "\nOnly 3 seats left!";
+  }, 2000);
+}
+
+function buyFlight() {
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+
+  const url = "https://www.google.com/search?q=flights+" + from + "+to+" + to;
+  window.open(url, "_blank");
+}
+
+function skipFlight() {
+  document.getElementById("flightResult").style.display = "none";
 }
 </script>
-</script> <script> function searchFlights() { const from = document.querySelector('input[placeholder="From where?"]').value.trim(); const to = document.querySelector('input[placeholder="To where?"]').value.trim(); const date = document.querySelector('input[type="date"]').value; if (!from || !to || !date) { alert("Please fill everything!"); return; } const resultBox = document.getElementById("flightResult"); const info = document.getElementById("flightInfo"); resultBox.style.display = "block"; info.innerText = "Searching for the best flights... ✈️"; setTimeout(function() { const price = Math.floor(Math.random() * 200) + 50; info.innerText = "Flight from " + from + " → " + to + " on " + date + ", £" + price; }, 2000); } function buyFlight() { const from = document.querySelector('input[placeholder="From where?"]').value.trim(); const to = document.querySelector('input[placeholder="To where?"]').value.trim(); const url = "https://www.google.com/search?q=cheap flights from " + from + " to " + to; window.open(url, "_blank"); } function skipFlight() { document.getElementById("flightResult").style.display = "none"; } </script> </body> </html>
+
+</body>
+</html>
