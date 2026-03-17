@@ -92,12 +92,12 @@ h1{
   <input type="text" id="to" placeholder="To where?">
   <input type="date" id="date">
   <select id="passengers">
-    <option value="1">1 Passenger</option>
-    <option value="2">2 Passengers</option>
-    <option value="3">3 Passengers</option>
-    <option value="4">4 Passengers</option>
-    <option value="5">5 Passengers</option>
-    <option value="6">6 Passengers</option>  
+    <!-- 1 to 20 passengers -->
+    <script>
+      for(let i=1;i<=20;i++){
+        document.write(`<option value="${i}">${i} Passenger${i>1?'s':''}</option>`);
+      }
+    </script>
   </select>
   <input type="text" id="ages" placeholder="Children ages (comma separated)">
   <button class="search-btn" onclick="searchFlights()">Search</button>
@@ -138,13 +138,14 @@ function searchFlights() {
   }, 1500);
 }
 
-// Open real airline booking page
+// Open Skyscanner with the user's search
 function buyFlight() {
   const from = document.getElementById("from").value.trim();
   const to = document.getElementById("to").value.trim();
+  const date = document.getElementById("date").value;
 
-  // Example airline page (LOT), will open real booking page
-  const url = `https://www.lot.com/gb/en/flights?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+  // Skyscanner format: https://www.skyscanner.net/transport/flights/from/to/date/
+  const url = `https://www.skyscanner.net/transport/flights/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date.replace(/-/g,'')}/?adults=${document.getElementById("passengers").value}`;
   window.open(url, "_blank");
 }
 
