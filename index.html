@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Planning</title>
+<title>Start Planning Flights</title>
 
 <style>
 body{
@@ -94,7 +94,7 @@ h1{
   <button class="search-btn" onclick="searchFlights()">Search</button>
 </div>
 
-<!-- RESULT -->
+<!-- RESULT BOX -->
 <div id="flightResult">
   <div class="result-card">
     <p id="flightInfo">Searching...</p>
@@ -117,20 +117,24 @@ function searchFlights() {
   const resultBox = document.getElementById("flightResult");
   const info = document.getElementById("flightInfo");
 
+  // Show searching message
   resultBox.style.display = "block";
   info.innerText = "Searching for the best flights... ✈️";
 
+  // After 2 seconds, show mock flight result
   setTimeout(function() {
     const price = Math.floor(Math.random() * 200) + 50;
     info.innerText = "✈️ Flight from " + from + " → " + to + " on " + date + "\n💸 Price: £" + price + "\nOnly 3 seats left!";
   }, 2000);
 }
 
+// Open a real airline booking page (example: LOT Airlines)
 function buyFlight() {
   const from = document.getElementById("from").value.trim();
   const to = document.getElementById("to").value.trim();
 
-  const url = "https://www.google.com/search?q=flights+" + from + "+to+" + to;
+  // Example LOT Airlines booking link (adjustable to other airlines)
+  const url = "https://www.lot.com/gb/en/flights?from=" + encodeURIComponent(from) + "&to=" + encodeURIComponent(to);
   window.open(url, "_blank");
 }
 
