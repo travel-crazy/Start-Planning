@@ -145,7 +145,7 @@ function buyFlight() {
   const date = document.getElementById("date").value;
 
   // Skyscanner format: https://www.skyscanner.net/transport/flights/from/to/date/
-  const url = `https://www.skyscanner.net/transport/flights/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date.replace(/-/g,'')}/?adults=${document.getElementById("passengers").value}`;
+  const url = `https://www.google.com/travel/flights/flights-from-page.html?gl=US&hl=en-US/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date.replace(/-/g,'')}/?adults=${document.getElementById("passengers").value}`;
   window.open(url, "_blank");
 }
 
