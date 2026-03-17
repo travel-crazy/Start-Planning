@@ -92,7 +92,6 @@ h1{
   <input type="text" id="to" placeholder="To where?">
   <input type="date" id="date">
   <select id="passengers">
-    <!-- 1 to 20 passengers -->
     <script>
       for(let i=1;i<=20;i++){
         document.write(`<option value="${i}">${i} Passenger${i>1?'s':''}</option>`);
@@ -138,14 +137,17 @@ function searchFlights() {
   }, 1500);
 }
 
-// Open Skyscanner with the user's search
+// Open Google Flights with proper formatting
 function buyFlight() {
-  const from = document.getElementById("from").value.trim();
-  const to = document.getElementById("to").value.trim();
+  let from = document.getElementById("from").value.trim();
+  let to = document.getElementById("to").value.trim();
   const date = document.getElementById("date").value;
 
-  // Skyscanner format: https://www.skyscanner.net/transport/flights/from/to/date/
-  const url = `https://www.google.com/travel/flights/flights-from-page.html?gl=US&hl=en-US/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date.replace(/-/g,'')}/?adults=${document.getElementById("passengers").value}`;
+  // Replace spaces with hyphens for URL
+  from = from.replace(/\s+/g, '-');
+  to = to.replace(/\s+/g, '-');
+
+  const url = `https://www.google.com/flights?hl=en#flt=${from}.${to}.${date}`;
   window.open(url, "_blank");
 }
 
