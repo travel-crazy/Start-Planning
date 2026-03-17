@@ -19,6 +19,7 @@ h1{
 
 .planner-bar{
     display:flex;
+    flex-wrap: wrap;
     gap:10px;
     padding:15px;
     background:white;
@@ -28,7 +29,7 @@ h1{
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-.planner-bar input{
+.planner-bar input, .planner-bar select{
     padding:10px;
     border-radius:8px;
     border:1px solid #ccc;
@@ -49,7 +50,6 @@ h1{
     background:#0056b3;
 }
 
-/* Result box */
 #flightResult{
     display:none;
     margin-top:20px;
@@ -85,12 +85,19 @@ h1{
 
 <body>
 
-<h1>Search Flights ✈️</h1>
+<h1>Start Planning Your Trip ✈️</h1>
 
 <div class="planner-bar">
   <input type="text" id="from" placeholder="From where?">
   <input type="text" id="to" placeholder="To where?">
   <input type="date" id="date">
+  <select id="passengers">
+    <option value="1">1 Passenger</option>
+    <option value="2">2 Passengers</option>
+    <option value="3">3 Passengers</option>
+    <option value="4">4 Passengers</option>
+  </select>
+  <input type="text" id="ages" placeholder="Children ages (comma separated)">
   <button class="search-btn" onclick="searchFlights()">Search</button>
 </div>
 
@@ -108,9 +115,11 @@ function searchFlights() {
   const from = document.getElementById("from").value.trim();
   const to = document.getElementById("to").value.trim();
   const date = document.getElementById("date").value;
+  const passengers = document.getElementById("passengers").value;
+  const ages = document.getElementById("ages").value.trim();
 
   if (!from || !to || !date) {
-    alert("Please fill all fields!");
+    alert("Please fill From, To, and Date!");
     return;
   }
 
@@ -119,22 +128,21 @@ function searchFlights() {
 
   // Show searching message
   resultBox.style.display = "block";
-  info.innerText = "Searching for the best flights... ✈️";
+  info.innerText = "Searching for flights... ✈️";
 
-  // After 2 seconds, show mock flight result
+  // Simulate search delay
   setTimeout(function() {
-    const price = Math.floor(Math.random() * 200) + 50;
-    info.innerText = "✈️ Flight from " + from + " → " + to + " on " + date + "\n💸 Price: £" + price + "\nOnly 3 seats left!";
-  }, 2000);
+    info.innerText = `Flight from ${from} → ${to} on ${date}\nPassengers: ${passengers}\nChildren ages: ${ages ? ages : 'None'}`;
+  }, 1500);
 }
 
-// Open a real airline booking page (example: LOT Airlines)
+// Open real airline booking page
 function buyFlight() {
   const from = document.getElementById("from").value.trim();
   const to = document.getElementById("to").value.trim();
 
-  // Example LOT Airlines booking link (adjustable to other airlines)
-  const url = "https://www.lot.com/gb/en/flights?from=" + encodeURIComponent(from) + "&to=" + encodeURIComponent(to);
+  // Example airline page (LOT), will open real booking page
+  const url = `https://www.lot.com/gb/en/flights?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
   window.open(url, "_blank");
 }
 
