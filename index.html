@@ -73,7 +73,7 @@ h1{
     <span class="toggle-text" id="trip-text">One Way</span>
   </div>
 
-  <button class="search-btn">Start Planning</button>
+  <button class="search-btn">Search</button>
 </div>
 
 <style>
@@ -172,5 +172,30 @@ toggle.addEventListener('change', () => {
 // Initialize: hide arrival if one way
 if(!toggle.checked){
   arrival.style.display = 'none';
+}
+</script>
+<script>
+function searchFlights() {
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+  const date = document.getElementById("date").value;
+
+  if (!from || !to || !date) {
+    alert("Please enter From, To, and Date!");
+    return;
+  }
+
+  const resultBox = document.getElementById("flightResult");
+  const info = document.getElementById("flightInfo");
+
+  // Show "Searching..."
+  resultBox.style.display = "block";
+  info.innerText = "Searching for the best flights... ✈️";
+
+  // Wait 2 seconds, then show result
+  setTimeout(() => {
+    const price = Math.floor(Math.random() * 200) + 50;
+    info.innerText = `Flight from ${from} → ${to} on ${date}, £${price}`;
+  }, 2000);
 }
 </script>
