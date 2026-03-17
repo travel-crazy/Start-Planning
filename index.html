@@ -73,9 +73,13 @@ h1{
     <span class="toggle-text" id="trip-text">One Way</span>
   </div>
 
-  <button class="search-btn" onclick="SearchingFlights()">search</button>
+  <button class="Search-btn" onclick="SearchingFlights()">search</button>
 </div>
-
+<div id="flightResult" style="display:none; text-align:center; margin-top:20px;">
+  <p id="flightInfo"></p>
+  <button onclick="buyFlight()">Buy</button>
+  <button onclick="skipFlight()">Skip</button>
+</div>
 <style>
 .planner-bar{
   display:flex;
