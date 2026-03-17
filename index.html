@@ -174,28 +174,4 @@ if(!toggle.checked){
   arrival.style.display = 'none';
 }
 </script>
-<script>
-function searchFlights() {
-  const from = document.getElementById("from").value.trim();
-  const to = document.getElementById("to").value.trim();
-  const date = document.getElementById("date").value;
-
-  if (!from || !to || !date) {
-    alert("Please enter From, To, and Date!");
-    return;
-  }
-
-  const resultBox = document.getElementById("flightResult");
-  const info = document.getElementById("flightInfo");
-
-  // Show "Searching..."
-  resultBox.style.display = "block";
-  info.innerText = "Searching for the best flights... ✈️";
-
-  // Wait 2 seconds, then show result
-  setTimeout(() => {
-    const price = Math.floor(Math.random() * 200) + 50;
-    info.innerText = `Flight from ${from} → ${to} on ${date}, £${price}`;
-  }, 2000);
-}
-</script>
+</script> <script> function searchFlights() { const from = document.querySelector('input[placeholder="From where?"]').value.trim(); const to = document.querySelector('input[placeholder="To where?"]').value.trim(); const date = document.querySelector('input[type="date"]').value; if (!from || !to || !date) { alert("Please fill everything!"); return; } const resultBox = document.getElementById("flightResult"); const info = document.getElementById("flightInfo"); resultBox.style.display = "block"; info.innerText = "Searching for the best flights... ✈️"; setTimeout(function() { const price = Math.floor(Math.random() * 200) + 50; info.innerText = "Flight from " + from + " → " + to + " on " + date + ", £" + price; }, 2000); } function buyFlight() { const from = document.querySelector('input[placeholder="From where?"]').value.trim(); const to = document.querySelector('input[placeholder="To where?"]').value.trim(); const url = "https://www.google.com/search?q=cheap flights from " + from + " to " + to; window.open(url, "_blank"); } function skipFlight() { document.getElementById("flightResult").style.display = "none"; } </script> </body> </html>
