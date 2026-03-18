@@ -1,25 +1,120 @@
-<h2>Step 1: Book Your Flight</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Start Planning</title>
 
-<button onclick="startFlightSearch()">🔍 Find Flights</button>
-<button onclick="skipFlight()">⏭ Skip (Already Booked)</button>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f7fb;
+}
 
-<p id="infoText">
-  After booking your flight, come back here and click Continue.
-</p>
+/* Top banner with your image */
+.banner {
+  height: 220px;
+  background: url("https://cdn.elearningindustry.com/wp-content/uploads/2016/07/start-planning-elearning-courses.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
 
-<button id="continueBtn" style="display:none;" onclick="continuePlanning()">
-  ✅ Continue Planning
-</button>
+/* Card container */
+.card {
+  max-width: 500px;
+  margin: -60px auto 0 auto;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Title */
+.card h2 {
+  margin-bottom: 10px;
+}
+
+/* Description text */
+.card p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+button {
+  border: none;
+  padding: 12px 20px;
+  margin: 8px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Primary button */
+.primary {
+  background: #007aff;
+  color: white;
+}
+
+.primary:hover {
+  background: #005ecb;
+}
+
+/* Secondary button */
+.secondary {
+  background: #e5e7eb;
+}
+
+.secondary:hover {
+  background: #d1d5db;
+}
+
+/* Continue button hidden initially */
+#continueBtn {
+  display: none;
+  margin-top: 15px;
+  background: #22c55e;
+  color: white;
+}
+
+#continueBtn:hover {
+  background: #16a34a;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="banner">
+  Start Planning ✈️
+</div>
+
+<div class="card">
+  <h2>Book Your Flight</h2>
+  <p>Find and book your flight, then come back to continue planning your trip.</p>
+
+  <button class="primary" onclick="startFlightSearch()">🔍 Find Flights</button>
+  <button class="secondary" onclick="skipFlight()">⏭ Already Booked</button>
+
+  <button id="continueBtn" onclick="continuePlanning()">
+    ✅ Continue Planning
+  </button>
+</div>
 
 <script>
 function startFlightSearch() {
   window.open("https://www.skyscanner.net", "_blank");
-
-  document.getElementById("infoText").innerText =
-    "Book your flight in the new tab, then come back here!";
 }
 
-// Detect when user comes back to the tab
+// Show continue button when user comes back
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     document.getElementById("continueBtn").style.display = "inline-block";
@@ -31,9 +126,9 @@ function skipFlight() {
 }
 
 function continuePlanning() {
-  alert("Moving to next step: Accommodation 🏨");
-  // You can redirect or show next section here
-  // example:
-  // window.location.href = "next-step.html";
+  alert("Next step: Accommodation 🏨");
 }
 </script>
+
+</body>
+</html>
